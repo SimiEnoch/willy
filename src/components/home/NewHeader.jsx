@@ -1,15 +1,16 @@
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import React, { useState } from "react";
-import { useGlobalContext } from "../Context/Context";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../config/Firebase1";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { signOut } from "firebase/auth";
-import Personicon from "../icons/Personicon";
-import SearchIcon from "../icons/SearchIcon";
-import LikeIcon from "../icons/LikeIcon";
-import CartIcon from "../icons/CartIcon";
-import Logo from "../images/Meubel House_Logos-05.png";
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import React, { useState } from 'react';
+import { useGlobalContext } from '../Context/Context';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../config/Firebase1';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
+import Personicon from '../icons/Personicon';
+import SearchIcon from '../icons/SearchIcon';
+import LikeIcon from '../icons/LikeIcon';
+import CartIcon from '../icons/CartIcon';
+import Logo from '../images/Meubel House_Logos-05.png';
+import LasuIcon from '../images/lasuIcon.jpg';
 
 const NewHeader = () => {
   const { cart } = useGlobalContext();
@@ -33,17 +34,17 @@ const NewHeader = () => {
     <header className="fixed flex z-10 top-0 w-screen shadow items-center font-[Calibri] justify-between bg-white h-[60px] sm:px-0 md:px-10 text-black ">
       <div className="flex gap-1 ">
         <img
-          src={Logo}
-          alt="My Logo"
-          className="w-10 mt-[17px] h-5 transform scale-y-[-1]"
+          src={LasuIcon}
+          alt="Lasu Logo"
+          className="w-10 mt-[7px] h-10"
         />
         <h1 className="text-lg font-bold py-3 tracking-wide font-sans">
-          Willy ST.
+          Lasu Stores.
         </h1>
       </div>
       <nav
         className={`absolute bg-white text-black  ${
-          hamburger ? "top-[-1000%]" : "top-[50px]"
+          hamburger ? 'top-[-1000%]' : 'top-[50px]'
         } w-full left-0 z-[-1] p-8 duration-2000 md:left-auto md:w-auto shadow md:shadow-none md:top-0 md:relative md:bg-transparent md:p-0 md:z-[0]`}
       >
         <ul className="flex gap-12 text-[14px] md:text-[16px] font-semibold  flex-col md:flex-row ">
@@ -55,13 +56,7 @@ const NewHeader = () => {
           </li>
 
           <li className="hover:text-slate-800 duration-500">
-            <Link to="/stores">Stores</Link>
-          </li>
-          <li className="hover:text-slate-800 duration-500">
             <Link to="/contact-us">Contact</Link>
-          </li>
-          <li className="hover:text-slate-800 duration-500">
-            <Link to="/craftsmen">Craftsmen</Link>
           </li>
         </ul>
       </nav>
@@ -102,13 +97,17 @@ const NewHeader = () => {
       <div className="md:hidden block ">
         <button
           onClick={buttonHandler}
-          className={`${hamburger ? "block" : "hidden"} duration-500 w-8`}
+          className={`${
+            hamburger ? 'block' : 'hidden'
+          } duration-500 w-8`}
         >
           <AiOutlineMenu />
         </button>
         <button
           onClick={buttonHandler}
-          className={`${hamburger ? "hidden" : "block"} duration-500 w-8`}
+          className={`${
+            hamburger ? 'hidden' : 'block'
+          } duration-500 w-8`}
         >
           <AiOutlineClose />
         </button>

@@ -1,12 +1,12 @@
-import React from "react";
-import HerOBackground from "../images/Hero-Background.png";
-import { Navigate, useNavigate } from "react-router-dom";
+import React from 'react';
+import HerOBackground from '../images/Hero-Background.png';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const NewHero = () => {
   const navigate = useNavigate();
 
   const buyItemNow = () => {
-    navigate("/shop/all-products");
+    navigate('/shop/all-products');
   };
   return (
     <div className="relative">
@@ -22,14 +22,17 @@ const NewHero = () => {
         >
           <div></div>
           <div className="flex flex-col gap-5 mb-5 md:mb-0 bg-[#FFF3E3] p-8">
-            <p className=" tracking-wider font-bold">New Arrivals </p>
+            <p className=" tracking-wider font-bold">
+              New School Arrivals{' '}
+            </p>
             <h2 className="text-[#B88E2F] text-[2rem] font-bold">
-              Unleashing Effortless Comfort Right <br /> To Your Doorstep
+              Bringing Comfort to Your Campus
             </h2>
-            Discover a world of style and convenience at our online store.
-            Elevate your lifestyle with our curated collection of premium
-            products. From fashion essentials to tech innovations, we have
-            everything you need.
+            Explore a realm of convenience and style right at your
+            fingertips. Elevate your campus experience with our
+            meticulously selected range of premium products. From
+            fashion must-haves to cutting-edge tech, we've got all
+            your university essentials covered.
             <div>
               <button
                 className="bg-[#B88E2F] p-4 px-10 text-white text-md font-bold tracking-wider"

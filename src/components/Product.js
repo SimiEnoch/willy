@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useGlobalContext } from "./Context/Context";
-import "../App.css";
-import { useNavigate } from "react-router-dom";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import SkelentonLoader from "./others/SkelentonLoader";
-import StarRating from "./Rating";
+import React, { useEffect, useState } from 'react';
+import { useGlobalContext } from './Context/Context';
+import '../App.css';
+import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import SkelentonLoader from './others/SkelentonLoader';
+import StarRating from './Rating';
 
 export const Product = ({ Data }) => {
   const navigate = useNavigate();
@@ -118,7 +118,9 @@ export const Product = ({ Data }) => {
                         }}
                       >
                         <h4 className="text-[#3A3A3A] px-2 font-[Calibri] leading-7 font-bold text-[20px]">
-                          <span className="uppercase">{name.charAt(0)}</span>
+                          <span className="uppercase">
+                            {name.charAt(0)}
+                          </span>
                           {name.slice(1).toLowerCase()}
                         </h4>
                         <span>
@@ -131,12 +133,12 @@ export const Product = ({ Data }) => {
                         <span className="flex px-2 py-2">
                           <div className="text-start">
                             <h4 className="text-[#3A3A3A] font-[Calibri] font-bold bg-green-400 px-2 text-[20px]   rounded ">
-                              ${price.toLocaleString()}
+                              ₦{price.toLocaleString()}
                             </h4>
                           </div>
                           <div className="flex-1 text-end flex items-end justify-end">
                             <h4 className="text-white font-[Calibri] font-normal bg-red-400 px-2 line-through text-[15px] rounded ">
-                              ${oldPrice.toLocaleString()}
+                              ₦{oldPrice.toLocaleString()}
                             </h4>
                           </div>
                         </span>
@@ -161,10 +163,10 @@ export const Product = ({ Data }) => {
                           <Alert
                             severity="success"
                             sx={{
-                              backgroundColor: "#006400",
-                              color: "#ffffff",
-                              display: "flex",
-                              alignItems: "center",
+                              backgroundColor: '#006400',
+                              color: '#ffffff',
+                              display: 'flex',
+                              alignItems: 'center',
                             }}
                             className="fixed top-14 left-1/2 transform -translate-x-1/2 w-full"
                           >

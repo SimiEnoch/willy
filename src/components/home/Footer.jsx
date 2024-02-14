@@ -1,7 +1,7 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   useEffect(() => {
@@ -13,10 +13,10 @@ export const Footer = () => {
       <div className="grid  pt-5 justify-start items-start px-10  w-full gap-6 mb-3 grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         <div className="flex flex-col">
           <h3 className="text-black text-3xl mb-10 font-bold font-sans">
-            Willy ST.
+            LASU STORES.
           </h3>
           <p className="font-[Calibri] text-[#9F9F9F] text-md">
-            30, Alhaji Amoo Street Lagos, <br /> Nigeria
+            Lasu Main Rd, Ojo, Lagos 102101, Lagos <br /> Nigeria
           </p>
         </div>
         <div className="grid grid-cols-1">
@@ -37,42 +37,19 @@ export const Footer = () => {
           >
             Shop
           </Link>
-          <Link
-            to="/stores"
-            className="font-[Calibri] py-5 text-black font-semibold text-md"
-          >
-            Stores
-          </Link>
-          <Link
-            to="/contact-us"
-            className="font-[Calibri] py-5 text-black font-semibold text-md"
-          >
-            Contact
-          </Link>
         </div>
 
         <div className="grid grid-cols-1">
           <h3 className="text-[#9F9F9F] mb-7 text-1xl underline font-normal font-[Calibri]">
             Help
           </h3>
-          <a
-            href=""
-            className="font-[Calibri] font-semibold py-5 text-black text-md"
+
+          <Link
+            to="/contact-us"
+            className="font-[Calibri] py-5 text-black font-semibold text-md"
           >
-            Payment Options
-          </a>
-          <a
-            href=""
-            className="font-[Calibri] font-semibold py-5 text-black text-md"
-          >
-            Returns
-          </a>
-          <a
-            href=""
-            className="font-[Calibri] font-semibold py-5 text-black text-md"
-          >
-            Privacy Policies
-          </a>
+            Contact
+          </Link>
         </div>
 
         <div className="grid grid-cols-1">
@@ -86,16 +63,25 @@ export const Footer = () => {
               type="text"
             />
             <span>
-              <button className="border-black border-b-2">SUBSCRIBE</button>
+              <button
+                className="border-black border-b-2"
+                onClick={() =>
+                  alert(
+                    'You have successfully subscribed to our news letter'
+                  )
+                }
+              >
+                SUBSCRIBE
+              </button>
             </span>
           </div>
         </div>
       </div>
       <p className="text-center text-black text-[35px] font-bold mt-16">
-        Willy ST.
+        Lasu Stores.
       </p>
       <p className="text-center text-black text-[10px] font-sm mt-2">
-        © 2023 Willy ST. INC. All rights reserved
+        © 2023 LASU ST. INC. All rights reserved
       </p>
     </div>
   );

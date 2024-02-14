@@ -1,11 +1,9 @@
-import OurProducts from "./OurProducts";
-import NewHeader from "./NewHeader";
-import OtherStores from "./otherStores";
-import NewHero from "./NewHero";
-import ShareProducts from "./ShareProducts";
-import { Footer } from "./Footer";
-import BrowsetheRange from "./BrowsetheRange";
-import { useEffect } from "react";
+import OurProducts from './OurProducts';
+import NewHeader from './NewHeader';
+import OtherStores from './otherStores';
+import NewHero from './NewHero';
+import { Footer } from './Footer';
+import { useEffect } from 'react';
 
 const HomePage = () => {
   useEffect(() => {
@@ -16,10 +14,8 @@ const HomePage = () => {
     <div className="w-screen">
       <NewHeader />
       <NewHero />
-      <BrowsetheRange />
       <OurProducts />
       <OtherStores />
-      <ShareProducts />
       <Footer />
     </div>
   );

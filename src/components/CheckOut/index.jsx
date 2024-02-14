@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import NewHeader from "../home/NewHeader";
-import Breadcrumbs from "../others/Breadcrumbs";
-import ShopHeaderImage from "../images/Rectangle 1.png";
-import MilloxiLogo from "../images/Meubel House_Logos-05.png";
-import ShopFooter from "../shop/ShopFooter";
-import { Footer } from "../home/Footer";
-import { useGlobalContext } from "../Context/Context";
-import ReuseableInputField from "../CheckOut/reuseableInputField";
-import Select from "react-select";
-import { CountriesData } from "./countryData";
-import { LiaToggleOffSolid, LiaToggleOnSolid } from "react-icons/lia";
+import React, { useEffect, useState } from 'react';
+import NewHeader from '../home/NewHeader';
+import Breadcrumbs from '../others/Breadcrumbs';
+import ShopHeaderImage from '../images/Rectangle 1.png';
+import LasuIcon from '../images/lasuIcon.jpg';
+import ShopFooter from '../shop/ShopFooter';
+import { Footer } from '../home/Footer';
+import { useGlobalContext } from '../Context/Context';
+import ReuseableInputField from '../CheckOut/reuseableInputField';
+import Select from 'react-select';
+import { CountriesData } from './countryData';
+import { useNavigate } from 'react-router-dom';
 
 const CheckOut = () => {
   const { cart } = useGlobalContext();
@@ -19,6 +19,8 @@ const CheckOut = () => {
   const [toggleCurrency, setToggleCurrency] = useState(true);
 
   let transferDirectly = false;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,12 +32,17 @@ const CheckOut = () => {
     setSelectedCountry(selectedOption);
   };
 
+  const placeOrder = () => {
+    alert('Order placed');
+    navigate('/');
+  };
+
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      border: "1px solid gray",
-      paddingTop: "16px",
-      paddingBottom: "16px",
+      border: '1px solid gray',
+      paddingTop: '16px',
+      paddingBottom: '16px',
     }),
   };
 
@@ -57,11 +64,14 @@ const CheckOut = () => {
   };
 
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.amount * item.price, 0);
+    return cart.reduce(
+      (total, item) => total + item.amount * item.price,
+      0
+    );
   };
 
   const formatNumberWithCommas = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   return (
@@ -69,21 +79,21 @@ const CheckOut = () => {
       <NewHeader />
 
       <div className="relative font-[Calibri]">
-        <img src={ShopHeaderImage} alt="img" className="w-full h-[40vh]" />
+        <img
+          src={ShopHeaderImage}
+          alt="img"
+          className="w-full h-[40vh]"
+        />
         <div className="absolute inset-0 flex items-center justify-center">
           <section className="mt-[70px] px-8 md:px-16 md:text-left py-6 text-center grid md:grid-cols-1 items-center justify-center">
             <div>
               <div className="flex items-center justify-center">
-                <img
-                  src={MilloxiLogo}
-                  alt=""
-                  className="transform scale-y-[-1]"
-                />
+                <img src={LasuIcon} alt="" className="h-24 w-24" />
               </div>
               <h1 className="font-[Calibri] text-[2rem] font-extrabold text-center">
                 Checkout
               </h1>
-              <Breadcrumbs list={["Home", "Checkout"]} />
+              <Breadcrumbs list={['Home', 'Checkout']} />
             </div>
           </section>
         </div>
@@ -93,7 +103,9 @@ const CheckOut = () => {
         <div className="flex flex-col  w-full md:flex-glow-3 sm:px-0 lg:px-14 lg:mx-14 gap-6">
           <div className="flex  py-3 px-2">
             <div className="w-full">
-              <h3 className="text-[22px]  font-semibold">Billing details</h3>
+              <h3 className="text-[22px]  font-semibold">
+                Billing details
+              </h3>
             </div>
           </div>
 
@@ -101,7 +113,9 @@ const CheckOut = () => {
           <div>
             <div className="sm:block lg:flex gap-7">
               <div>
-                <label className="text-[14px] font-bold">First Name</label>{" "}
+                <label className="text-[14px] font-bold">
+                  First Name
+                </label>{' '}
                 <br />
                 <input
                   type="text"
@@ -111,7 +125,9 @@ const CheckOut = () => {
               </div>
 
               <div>
-                <label className="text-[14px] font-bold">Last Name</label>{" "}
+                <label className="text-[14px] font-bold">
+                  Last Name
+                </label>{' '}
                 <br />
                 <input
                   type="text"
@@ -125,16 +141,18 @@ const CheckOut = () => {
           <div>
             <label className="text-[14px] font-bold">
               Company Name (Optional)
-            </label>{" "}
+            </label>{' '}
             <br />
             <input
               type="text"
               className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{" "}
+            />{' '}
           </div>
 
           <div className="">
-            <label className="text-[14px] font-bold">Country/Region</label>
+            <label className="text-[14px] font-bold">
+              Country/Region
+            </label>
             <Select
               id="countryCode"
               name="countryCode"
@@ -152,46 +170,54 @@ const CheckOut = () => {
           <ReuseableInputField label="Town / City" />
 
           <div>
-            <label className="text-[14px] font-bold">Zip code</label> <br />
+            <label className="text-[14px] font-bold">Zip code</label>{' '}
+            <br />
             <input
               type="number"
               className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{" "}
+            />{' '}
           </div>
 
           <div>
-            <label className="text-[14px] font-bold">Phone Number</label> <br />
+            <label className="text-[14px] font-bold">
+              Phone Number
+            </label>{' '}
+            <br />
             <input
               type="number"
               className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{" "}
+            />{' '}
           </div>
 
           <div>
-            <label className="text-[14px] font-bold ">Email Address</label>{" "}
+            <label className="text-[14px] font-bold ">
+              Email Address
+            </label>{' '}
             <br />
             <input
               type="email"
               className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{" "}
+            />{' '}
           </div>
 
           <div>
             <label className="text-[14px] font-bold">
               Additional Information
-            </label>{" "}
+            </label>{' '}
             <br />
             <input
               type="text"
               className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{" "}
+            />{' '}
           </div>
         </div>
 
         <div className="rounded font-[Calibri] lg:w-[100%] lg:px-14 sm:w-full h-full py-1 mb-2 gap-20 overflow-y-auto sticky top-20">
           <div className="flex justify-between">
             <div>
-              <div className="font-bold text-xl">Products Ordered</div>
+              <div className="font-bold text-xl">
+                Products Ordered
+              </div>
               <div className="flex flex-col  py-2  gap-0 ">
                 {cart.map((item) => (
                   <div className="text-gray-500 font-bold text-[14px]">
@@ -203,11 +229,12 @@ const CheckOut = () => {
 
             <div className="flex items-center">
               <div className="py-2 text-[#B88E2F] font-bold md:text-[20px] xl:text-[30px]">
-                $
+                ₦
                 {cart
                   .map((item) => item.price * item.amount)
                   .reduce(
-                    (accumulator, currentValue) => accumulator + currentValue,
+                    (accumulator, currentValue) =>
+                      accumulator + currentValue,
                     0
                   )
                   .toLocaleString()}
@@ -218,56 +245,39 @@ const CheckOut = () => {
           <div className="flex justify-between font-[Calibri]">
             <div className="flex items-center">
               <h2 className="font-bold md:text-[15px] md:py-0 lg:py-5 xl:py-10 lg:text-lg">
-                Total Plus Delivery:{" "}
+                Total Plus Delivery:{' '}
               </h2>
             </div>
             <div className="flex justify-between">
               <p className="py-2 font-bold">Delivery: </p>
               <div className="py-2 text-[#B88E2F] font-bold md:text-[20px] xl:text-[30px]">
                 <p className="text-[16px] font-[Calibri] text-gray-700 m-0 p-0 text-end">
-                  + ${deliveryFee.toLocaleString()}
+                  + ₦{deliveryFee.toLocaleString()}
                 </p>
                 <hr />
-                USD ${(getTotalPrice() + Number(deliveryFee)).toLocaleString()}
+                NGN ₦
+                {(
+                  getTotalPrice() + Number(deliveryFee)
+                ).toLocaleString()}
               </div>
             </div>
           </div>
 
-          <div className="flex items-between">
-            <h3 className="font-bold py-2">Convert to NGN Naira?</h3>
-            <div className="flex  flex-1 justify-end gap-3">
-              <button onClick={() => setToggleCurrency(!toggleCurrency)}>
-                {toggleCurrency ? <LiaToggleOnSolid /> : <LiaToggleOffSolid />}
-              </button>
-              <div className="text-[#B88E2F] font-bold py-2">
-                {toggleCurrency && (
-                  <div className="text-[#B88E2F] font-bold sm:text-[15px] lg:text-[20px]">
-                    NGN ₦
-                    {formatNumberWithCommas(
-                      (getTotalPrice() + Number(deliveryFee)) * 1200
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-          {toggleCurrency && (
-            <p className="text-end font-[Calibri] text-md">
-              (@ the rate of ₦1,200 as at Jan 2024 )
-            </p>
-          )}
           <hr />
 
           <div className="font-[Calibri] ">
             <div className="py-3 ">
               <div className="flex gap-3">
                 <input type="radio" className="cursor-pointer " />
-                <label className="text-[22px] ">Direct Bank Transfer</label>
+                <label className="text-[22px] ">
+                  Direct Bank Transfer
+                </label>
               </div>
               <p className="text-[18px] text-black">
-                Make your payment directly into our bank account. Please use
-                your Order ID as the payment reference. Your order will not be
-                shipped until the funds have cleared in our account.
+                Make your payment directly into our bank account.
+                Please use your Order ID as the payment reference.
+                Your order will not be shipped until the funds have
+                cleared in our account.
               </p>
             </div>
 
@@ -275,25 +285,31 @@ const CheckOut = () => {
               <div className="py-3">
                 <div className="flex gap-3">
                   <input type="radio" className="cursor-pointer" />
-                  <label className="text-[22px] ">Cash On Delivery</label>
+                  <label className="text-[22px] ">
+                    Cash On Delivery
+                  </label>
                 </div>
                 <p className="text-[17px] text-black">
-                  Pay with cash when your order is delivered to your doorstep.
-                  Please have the exact amount ready for a smooth transaction.
+                  Pay with cash when your order is delivered to your
+                  doorstep. Please have the exact amount ready for a
+                  smooth transaction.
                 </p>
               </div>
             )}
             <p className="py-5 text-[#9F9F9F]">
-              Your personal data will be used to support your experience
-              throughout this website, to manage access to your account, and for
-              other purposes described in our{" "}
+              Your personal data will be used to support your
+              experience throughout this website, to manage access to
+              your account, and for other purposes described in our{' '}
               <button className=" underline text-blue-500">
                 privacy policy.
               </button>
             </p>
 
             <div className="text-center items-center justify-center mt-1 pt-1 flex">
-              <button className="border-2 border-black px-14 py-4 rounded">
+              <button
+                className="border-2 border-black px-14 py-4 rounded"
+                onClick={placeOrder}
+              >
                 Place Order
               </button>
             </div>

@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Data } from "../Data";
-import NewHeader from "../home/NewHeader";
-import { useGlobalContext } from "../Context/Context";
-import "../../App.css";
-import Breadcrumbs from "../others/Breadcrumbs";
-import Couch1 from "../images/Cloud sofa three seater + ottoman_1 1.png";
-import Couch2 from "../images/Cloud sofa three seater + ottoman_2 1.png";
-import { Footer } from "../home/Footer";
-import StarRating from "../Rating";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Lasudata } from '../Lasudata';
+import NewHeader from '../home/NewHeader';
+import { useGlobalContext } from '../Context/Context';
+import '../../App.css';
+import Breadcrumbs from '../others/Breadcrumbs';
+import { Footer } from '../home/Footer';
+import StarRating from '../Rating';
 
 const ProductDetails = () => {
   const { setCart, cart } = useGlobalContext();
-  const [activeButton, setActiveButton] = useState("first");
+  const [activeButton, setActiveButton] = useState('first');
   const [selectedImage, setSelectedImage] = useState(null);
 
   const { id } = useParams();
-  const oneProduct = Data.find((product) => product.id === parseInt(id));
+  const oneProduct = Lasudata.find(
+    (product) => product.id === parseInt(id)
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,7 +36,7 @@ const ProductDetails = () => {
       const additionalImage = oneProduct[`image${imgIndex}`];
       if (additionalImage) {
         updatedProduct[`image${imgIndex}`] = additionalImage.replace(
-          "_1",
+          '_1',
           `_${image}`
         );
       }
@@ -48,12 +48,14 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = () => {
-    console.log("Added to cart");
+    console.log('Added to cart');
     addToCart(oneProduct);
   };
 
   const addToCart = (dataItem) => {
-    const index = cart.findIndex((object) => object.id === dataItem.id);
+    const index = cart.findIndex(
+      (object) => object.id === dataItem.id
+    );
 
     if (index !== -1) {
       setCart((prev) => {
@@ -67,15 +69,21 @@ const ProductDetails = () => {
       return;
     }
 
-    setCart((prev) => [...prev, { ...dataItem, mainId: prev.length + 1 }]);
+    setCart((prev) => [
+      ...prev,
+      { ...dataItem, mainId: prev.length + 1 },
+    ]);
   };
 
   return (
-    <div key={id} className="border-none font-normal text-black font-[Calibri]">
+    <div
+      key={id}
+      className="border-none font-normal text-black font-[Calibri]"
+    >
       <NewHeader />
       <section className="mt-[20px] w-full md:text-left py-6 text-center grid md:grid-cols-1">
         <div className="bg-[#F9F1E7] px-8 md:px-16 pt-5 font-sans">
-          <Breadcrumbs list={["Home", "Shop", oneProduct.name]} />
+          <Breadcrumbs list={['Home', 'Shop', oneProduct.name]} />
         </div>
       </section>
 
@@ -130,7 +138,9 @@ const ProductDetails = () => {
         <div className="w-full text-lg text-start px-5 md:py-0 xl:py-0 lg:py-0 sm:py-20">
           <div className="">
             <h4 className="text-[#3A3A3A] px-5 font-[Calibri] leading-7 font-semibold text-[30px]">
-              <span className="uppercase">{oneProduct.name.charAt(0)}</span>
+              <span className="uppercase">
+                {oneProduct.name.charAt(0)}
+              </span>
               {oneProduct.name.slice(1).toLowerCase()}
             </h4>
             <div className=" text-start ">
@@ -141,12 +151,12 @@ const ProductDetails = () => {
             <span className="flex ">
               <div className=" text-start px-5">
                 <h4 className="text-[#3A3A3A] bg-green-300 px-1 font-sans font-bold text-[21px]  rounded ">
-                  ${oneProduct.price.toLocaleString()}
+                  ₦{oneProduct.price.toLocaleString()}
                 </h4>
               </div>
               <div className="">
                 <h4 className="text-[#898989] font-[Calibri] font-normal line-through text-[18px] px-5 rounded ">
-                  ${oneProduct.oldPrice.toLocaleString()}
+                  ₦{oneProduct.oldPrice.toLocaleString()}
                 </h4>
               </div>
             </span>
@@ -155,43 +165,12 @@ const ProductDetails = () => {
               <div
                 className="w-full"
                 dangerouslySetInnerHTML={{
-                  __html: oneProduct?.description?.replace(/\n/g, "<br />"),
+                  __html: oneProduct?.description?.replace(
+                    /\n/g,
+                    '<br />'
+                  ),
                 }}
               />
-            </div>
-
-            <div className="px-5 py-3 hover:cursor-pointer">
-              <h1 className=" text-gray-400 text-[1rem] mb-1">
-                Available Size(s)
-              </h1>
-              <div className="flex gap-3 cursor-pointer text-white">
-                <button className="bg-[#B88E2F]  hover:cursor-pointer cursor-pointer active:bg-[#B88E2F] rounded w-10">
-                  {oneProduct.size}
-                </button>
-                <button className="bg-[#f1cb9e] cursor-pointer  hover:cursor-pointer active:bg-[#B88E2F] rounded w-10">
-                  {oneProduct.othersize}
-                </button>
-                <button className="bg-[#f1cb9e] cursor-pointer active:bg-[#B88E2F]  hover:cursor-pointer rounded w-10">
-                  {oneProduct.thirdsize}
-                </button>
-              </div>
-            </div>
-
-            <div className="px-5 ">
-              <h1 className=" text-gray-400 text-[1rem] mb-1">
-                Colors Available
-              </h1>
-              <div className="flex gap-3 cursor-pointer text-white">
-                <div
-                  className={`colorstyles border-2 cursor-pointer active:bg-[#B88E2F] rounded-[50%] w-10 h-10`}
-                ></div>
-                <div
-                  className={`colorstylestwo border-2 cursor-pointer active:bg-[#B88E2F] rounded-[50%] w-10 h-10`}
-                ></div>{" "}
-                <div
-                  className={`colorstylesthree border-2 cursor-pointer active:bg-[#B88E2F] rounded-[50%] w-10 h-10`}
-                ></div>
-              </div>
             </div>
 
             <div className="px-5 mt-5 font-[Calibri] mb-3">
@@ -212,84 +191,75 @@ const ProductDetails = () => {
           <div key={idx} className="text-center">
             <button
               className={`${
-                activeButton === "first"
-                  ? "active-button"
-                  : "text-[25px] text-[#9F9F9F] px-7"
+                activeButton === 'first'
+                  ? 'active-button'
+                  : 'text-[25px] text-[#9F9F9F] px-7'
               }`}
-              onClick={() => handleButtonClick("first")}
+              onClick={() => handleButtonClick('first')}
             >
               Detailed Description
             </button>
             <button
               className={`${
-                activeButton === "second"
-                  ? "active-button"
-                  : "text-[25px] text-[#9F9F9F] px-7"
+                activeButton === 'second'
+                  ? 'active-button'
+                  : 'text-[25px] text-[#9F9F9F] px-7'
               }`}
-              onClick={() => handleButtonClick("second")}
+              onClick={() => handleButtonClick('second')}
             >
               Additional Information
             </button>
             <button
               className={`${
-                activeButton === "third"
-                  ? "active-button"
-                  : "text-[25px] text-[#9F9F9F] px-5"
+                activeButton === 'third'
+                  ? 'active-button'
+                  : 'text-[25px] text-[#9F9F9F] px-5'
               }`}
-              onClick={() => handleButtonClick("third")}
+              onClick={() => handleButtonClick('third')}
             >
               Reviews
             </button>
             {/* Content for Detailed Description */}
             <div className="flex flex-col items-center justify-center ">
-              {activeButton === "first" && product?.detailedDescription && (
-                <div className="py-3 px-10 font-bold text-black box-border border-[1px] flex flex-col items-center justify-center gap-3 w-[70vw] border-gray-300">
-                  {product?.detailedDescription}
-                  <div className="flex">
-                    <img
-                      src={Couch1}
-                      alt="Image 1"
-                      className="w-[50%] h-auto"
-                    />
-                    <img
-                      src={Couch2}
-                      alt="Image 2"
-                      className="w-[50%] h-auto"
-                    />
+              {activeButton === 'first' &&
+                product?.detailedDescription && (
+                  <div className="py-3 px-10 font-bold text-black box-border border-[1px] flex flex-col items-center justify-center gap-3 w-[70vw] border-gray-300">
+                    {product?.detailedDescription}
                   </div>
-                </div>
-              )}
+                )}
             </div>
             {/* Content for Additional Information */}
             <div className="flex flex-col items-center justify-center">
-              {activeButton === "second" && product?.additionalInformation && (
-                <div className="text-black font-bold px-10 flex flex-col items-center py-2 justify-center gap-3 w-[70vw] box-border border-gray-300 border-[1px]">
-                  {product?.additionalInformation}
-                </div>
-              )}
+              {activeButton === 'second' &&
+                product?.additionalInformation && (
+                  <div className="text-black font-bold px-10 flex flex-col items-center py-2 justify-center gap-3 w-[70vw] box-border border-gray-300 border-[1px]">
+                    {product?.additionalInformation}
+                  </div>
+                )}
             </div>
             {/* Content for Reviews */}
-            {activeButton === "third" && product?.additionalInformation && (
-              <div className="text-[#828181] mx-10 px-10 flex items-center justify-center flex-col">
-                {product?.reviews?.map((prod, reviewIdx) => (
-                  <div
-                    key={reviewIdx}
-                    className="text-start flex text-black gap-3 w-[70vw] box-border border-[1px] border-black"
-                  >
-                    <div className="flex-shrink-0 w-1/4 bg-gray-200 py-3 px-3">
-                      <h2>{prod.user}</h2>
-                      <h2 className="text-lg">{prod.title}</h2>
+            {activeButton === 'third' &&
+              product?.additionalInformation && (
+                <div className="text-[#828181] mx-10 px-10 flex items-center justify-center flex-col">
+                  {product?.reviews?.map((prod, reviewIdx) => (
+                    <div
+                      key={reviewIdx}
+                      className="text-start flex text-black gap-3 w-[70vw] box-border border-[1px] border-black"
+                    >
+                      <div className="flex-shrink-0 w-1/4 bg-gray-200 py-3 px-3">
+                        <h2>{prod.user}</h2>
+                        <h2 className="text-lg">{prod.title}</h2>
+                      </div>
+                      <div className="flex-1 py-3 px-3 font-bold">
+                        <p>
+                          Rating: <StarRating ratings={prod.rating} />
+                        </p>
+                        <p>Comment: {prod.comment}</p>
+                      </div>
                     </div>
-                    <div className="flex-1 py-3 px-3 font-bold">
-                      <p>
-                        Rating: <StarRating ratings={prod.rating} />
-                      </p>
-                      <p>Comment: {prod.comment}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
           </div>
         ))}
       </div>
