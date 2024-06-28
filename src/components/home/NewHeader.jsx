@@ -66,12 +66,12 @@ const NewHeader = () => {
       </nav>
 
       <div className="hover:text-yellow-500 flex gap-5">
-        <div className="pt-6">
+        {/* <div className="pt-6">
           <Personicon />
         </div>
         <div className="pt-6">
           <SearchIcon />
-        </div>
+        </div> */}
         {/* <div className="pt-6 ">
           <LikeIcon />
         </div> */}
