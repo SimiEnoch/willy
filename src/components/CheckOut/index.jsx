@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NewHeader from '../home/NewHeader';
 import Breadcrumbs from '../others/Breadcrumbs';
 import ShopHeaderImage from '../images/Rectangle 1.png';
-import LasuIcon from '../images/lasuIcon.jpg';
+import Icon from '../images/Meubel House_Logos-05.png';
 import ShopFooter from '../shop/ShopFooter';
 import { Footer } from '../home/Footer';
 import { useGlobalContext } from '../Context/Context';
@@ -88,7 +88,7 @@ const CheckOut = () => {
           <section className="mt-[70px] px-8 md:px-16 md:text-left py-6 text-center grid md:grid-cols-1 items-center justify-center">
             <div>
               <div className="flex items-center justify-center">
-                <img src={LasuIcon} alt="" className="h-24 w-24" />
+                <img src={Icon} alt="" className="h-24 w-24" />
               </div>
               <h1 className="font-[Calibri] text-[2rem] font-extrabold text-center">
                 Checkout
@@ -149,7 +149,7 @@ const CheckOut = () => {
             />{' '}
           </div>
 
-          <div className="">
+          {/* <div className="">
             <label className="text-[14px] font-bold">
               Country/Region
             </label>
@@ -163,7 +163,7 @@ const CheckOut = () => {
               className="w-full sm:w-full md:w-[32vw]   rounded-lg border-2"
               styles={customStyles}
             />
-          </div>
+          </div> */}
 
           <ReuseableInputField label="Street address" />
 

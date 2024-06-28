@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import { Lasudata } from '../Lasudata';
 import { Categories } from '../Categories';
 import { Product } from '../Product';
+import { Data } from '../Data';
 
 const allCategories = [
   'All',
-  ...new Set(Lasudata.map((data) => data.category)),
+  ...new Set(Data.map((data) => data.category)),
 ];
 console.log(allCategories);
 
 function OurProducts() {
-  const [products, setProducts] = useState(Lasudata);
+  const [products, setProducts] = useState(Data);
   const [categories] = useState(allCategories);
 
   const filterItems = (category) => {
     if (category === 'All') {
-      setProducts(Lasudata);
+      setProducts(Data);
       return;
     }
 
-    const newItems = Lasudata.filter(
+    const newItems = Data.filter(
       (data) => data.category === category
     );
     setProducts(newItems);

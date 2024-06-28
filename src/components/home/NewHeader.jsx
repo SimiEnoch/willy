@@ -10,7 +10,6 @@ import SearchIcon from '../icons/SearchIcon';
 import LikeIcon from '../icons/LikeIcon';
 import CartIcon from '../icons/CartIcon';
 import Logo from '../images/Meubel House_Logos-05.png';
-import LasuIcon from '../images/lasuIcon.jpg';
 
 const NewHeader = () => {
   const { cart } = useGlobalContext();
@@ -34,12 +33,12 @@ const NewHeader = () => {
     <header className="fixed flex z-10 top-0 w-screen shadow items-center font-[Calibri] justify-between bg-white h-[60px] sm:px-0 md:px-10 text-black ">
       <div className="flex gap-1 ">
         <img
-          src={LasuIcon}
-          alt="Lasu Logo"
-          className="w-10 mt-[7px] h-10"
+          src={Logo}
+          alt=" Logo"
+          className="w-10 mt-[7px] h-10 transform scale-y-[-1]"
         />
         <h1 className="text-lg font-bold py-3 tracking-wide font-sans">
-          Lasu Stores.
+          Willy.
         </h1>
       </div>
       <nav
@@ -57,6 +56,11 @@ const NewHeader = () => {
 
           <li className="hover:text-slate-800 duration-500">
             <Link to="/contact-us">Contact</Link>
+          </li>
+
+          <li className="">
+            <Link to="/stores">Stores</Link>
+            <li />
           </li>
         </ul>
       </nav>

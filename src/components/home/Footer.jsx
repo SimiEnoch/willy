@@ -13,10 +13,10 @@ export const Footer = () => {
       <div className="grid  pt-5 justify-start items-start px-10  w-full gap-6 mb-3 grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         <div className="flex flex-col">
           <h3 className="text-black text-3xl mb-10 font-bold font-sans">
-            LASU STORES.
+            Willy.
           </h3>
           <p className="font-[Calibri] text-[#9F9F9F] text-md">
-            Lasu Main Rd, Ojo, Lagos 102101, Lagos <br /> Nigeria
+            30, Alhaji Amoo Street, Lagos <br /> Nigeria
           </p>
         </div>
         <div className="grid grid-cols-1">
@@ -77,11 +77,23 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="text-center text-black text-[35px] font-bold mt-16">
-        Lasu Stores.
-      </p>
+      <div className="text-center text-black text-[35px] font-bold mt-10">
+        <p className="text-center text-red-600 text-[14px] font-normal py-1">
+          NOTE: that this website serves as a platform connecting
+          buyers with sellers.
+          <br /> While it facilitates transactions, it may not assume
+          full responsibility for any financial losses
+          <br /> or loss of valuable assets incurred during the
+          process.
+        </p>
+
+        <p className="text-center text-black text-[35px] font-bold">
+          Willy.
+        </p>
+      </div>
+
       <p className="text-center text-black text-[10px] font-sm mt-2">
-        © 2023 LASU ST. INC. All rights reserved
+        © 2023 Willy ST. INC. All rights reserved
       </p>
     </div>
   );

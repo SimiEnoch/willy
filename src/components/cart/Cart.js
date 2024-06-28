@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGlobalContext } from '../Context/Context';
 import {
   BsFillTrash3Fill,
@@ -18,51 +18,28 @@ export const Cart = ({
 }) => {
   const { cart, setCart } = useGlobalContext();
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   const increase = () => {
-    //Get the exact index of item
-    const index = cart.findIndex((object) => {
-      return object.id === id;
+    const updatedCart = cart.map((item) => {
+      if (item.id === id) {
+        return { ...item, amount: item.amount + 1 };
+      }
+      return item;
     });
-
-    // increase the amount by 1 everytime the user clicks the button
-
-    if (index !== -1) {
-      setCart((prev) => {
-        const newCart = [...prev];
-        newCart[index] = {
-          ...newCart[index],
-          amount: newCart[index].amount + 1,
-        };
-        return newCart;
-      });
-      return;
-    }
+    setCart(updatedCart);
   };
 
   const decrease = () => {
-    //Get the exact index of item
-    const index = cart.findIndex((object) => {
-      return object.id === id;
-    });
-
-    if (index !== -1) {
-      //So the users wont be able to reduce it more than 1
-
-      if (cart[index].amount <= 1) {
-        return;
+    const updatedCart = cart.map((item) => {
+      if (item.id === id && item.amount > 1) {
+        return { ...item, amount: item.amount - 1 };
       }
-
-      // reduce the amount by 1 everytime the user clicks the button
-      setCart((prev) => {
-        const newCart = [...prev];
-        newCart[index] = {
-          ...newCart[index],
-          amount: newCart[index].amount - 1,
-        };
-        return newCart;
-      });
-      return;
-    }
+      return item;
+    });
+    setCart(updatedCart);
   };
 
   const remove = () => {

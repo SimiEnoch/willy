@@ -6,26 +6,32 @@ import { Link } from 'react-router-dom';
 import NewHeader from '../home/NewHeader';
 import Breadcrumbs from '../others/Breadcrumbs';
 import ShopHeaderImage from '../images/Rectangle 1.png';
-import LasuIcon from '../images/lasuIcon.jpg';
+import Icon from '../images/Meubel House_Logos-05.png';
 import ShopFooter from '../shop/ShopFooter';
 import { Footer } from '../home/Footer';
 import { useMediaQuery } from 'react-responsive';
 
 const CartContainer = ({ cartContainer }) => {
   // const { amount } = useGlobalContext();
-  const { cart, clearCart } = useGlobalContext();
-
-  const isLargeScreen = useMediaQuery({ minWidth: 1100 });
-  const isMediumScreen = useMediaQuery({
-    minWidth: 375,
-    maxWidth: 1099,
-  });
+  const { cart, clearCart, setCart } = useGlobalContext();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    // Retrieve cart data from localStorage when the component mounts
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, [setCart]);
+
+  useEffect(() => {
+    // Update localStorage whenever the cart data changes
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const handleCheckOut = () => {
     navigate('/checkout');
@@ -46,7 +52,11 @@ const CartContainer = ({ cartContainer }) => {
             <section className="mt-[20px] px-8 md:px-16 md:text-left text-center grid md:grid-cols-1 items-center justify-center">
               <div>
                 <div className="flex items-center justify-center">
-                  <img src={LasuIcon} alt="" className="w-24 h-24" />
+                  <img
+                    src={Icon}
+                    alt=""
+                    className="transform scale-y-[-1]"
+                  />
                 </div>
                 <h1 className="font-[Calibri] text-[2rem] font-extrabold text-center">
                   Cart
@@ -86,7 +96,11 @@ const CartContainer = ({ cartContainer }) => {
           <section className="mt-[70px] px-8 md:px-16 md:text-left py-6 text-center grid md:grid-cols-1 items-center justify-center">
             <div>
               <div className="flex items-center justify-center">
-                <img src={LasuIcon} alt="" className="h-24 w-24" />
+                <img
+                  src={Icon}
+                  alt=""
+                  className="transform scale-y-[-1]"
+                />
               </div>
               <h1 className="font-[Calibri] text-[2rem] font-extrabold text-center">
                 Cart

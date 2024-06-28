@@ -15,6 +15,10 @@ import CheckOut from './components/CheckOut/index.jsx';
 import Contact from './components/contact/index.jsx';
 import Stores from './components/Stores/Stores.jsx';
 
+const getItemFromLocalStorage = JSON.parse(
+  localStorage.getItem('cart') || '[]'
+);
+
 function App() {
   const { cart } = useGlobalContext();
 

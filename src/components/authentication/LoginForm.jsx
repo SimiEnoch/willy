@@ -1,25 +1,24 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useState } from "react";
-import "./Form.css";
-import backgroundImage from "./backgroundImage.jpg";
-import { FcGoogle } from "react-icons/fc";
-import { FaCheck } from "react-icons/fa";
-import { AiOutlineMail } from "react-icons/ai";
-import { auth, provider } from "../config/Firebase1";
-import { signInWithPopup } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useState } from 'react';
+import './Form.css';
+import { FcGoogle } from 'react-icons/fc';
+import { FaCheck } from 'react-icons/fa';
+import { AiOutlineMail } from 'react-icons/ai';
+import { auth, provider } from '../config/Firebase1';
+import { signInWithPopup } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate = useNavigate();
 
-  const [loginWithEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [loginWithEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
   const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, provider);
-    navigate("/");
+    navigate('/');
   };
 
   const login = async () => {};
@@ -32,12 +31,12 @@ const LoginForm = () => {
   // }
 
   const schema = yup.object().shape({
-    email: yup.string().email().required("Email field is required"),
+    email: yup.string().email().required('Email field is required'),
     Password: yup
       .string()
       .min(8)
       .max(20)
-      .required("Passwords can contain symbols, letters, or numbers"),
+      .required('Passwords can contain symbols, letters, or numbers'),
   });
 
   const {
@@ -60,12 +59,12 @@ const LoginForm = () => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
   };
-  
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -74,12 +73,9 @@ const LoginForm = () => {
     <div className="h-screen flex items-center justify-center font-[Calibri] bg-[#DAA520]">
       <div className=" bg-white  shadow-md p-6 rounded-lg w-full max-w-lg">
         <div className="imageStyle text-center">
-          <img
-            alt="ddd"
-            src={backgroundImage}
-            className="w-20 h-20 rounded-full mx-auto mb-4"
-          />
-          <h2 className="text-2xl font-extrabold font-serif">CARSONS</h2>
+          <h2 className="text-2xl font-extrabold font-serif">
+            CARSONS
+          </h2>
           <p className="carsons-login-p">
             Please sign in to continue... We've got you covered.
           </p>
@@ -97,10 +93,12 @@ const LoginForm = () => {
               type="text"
               className="w-full px-3 py-2 border rounded border-gray-300 focus:outline-none focus:border-blue-500"
               placeholder="Email..."
-              {...register("email")}
+              {...register('email')}
               onChange={(event) => setLoginEmail(event.target.value)}
             />
-            <p className="text-red-500 text-xs mt-1">{errors.email?.message}</p>
+            <p className="text-red-500 text-xs mt-1">
+              {errors.email?.message}
+            </p>
           </div>
 
           <div className="mb-4">
@@ -111,13 +109,15 @@ const LoginForm = () => {
               Password
             </label>
             <input
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               id="password"
               className="w-full px-3 py-2 border rounded border-gray-300 focus:outline-none focus:border-blue-500"
               placeholder="Password..."
               value={password}
-              {...register("Password")}
-              onChange={(event) => setLoginPassword(event.target.value)}
+              {...register('Password')}
+              onChange={(event) =>
+                setLoginPassword(event.target.value)
+              }
             />
             <p className="text-red-500 text-xs mt-1">
               {errors.Password?.message}
@@ -125,13 +125,15 @@ const LoginForm = () => {
             <div className="tick-button-div flex gap-1">
               <button
                 type="button"
-                className={`show-password-btn ${showPassword ? "" : "active"}`}
+                className={`show-password-btn ${
+                  showPassword ? '' : 'active'
+                }`}
                 onClick={handlePasswordToggle}
               >
                 <FaCheck className="tick-icon" />
               </button>
               <p className="mt-1 ">
-                {showPassword ? "Hide Password" : "Show Password"}
+                {showPassword ? 'Hide Password' : 'Show Password'}
               </p>
             </div>
           </div>

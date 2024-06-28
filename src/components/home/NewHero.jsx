@@ -22,17 +22,16 @@ const NewHero = () => {
         >
           <div></div>
           <div className="flex flex-col gap-5 mb-5 md:mb-0 bg-[#FFF3E3] p-8">
-            <p className=" tracking-wider font-bold">
-              New School Arrivals{' '}
-            </p>
+            <p className=" tracking-wider font-bold">New Arrivals </p>
             <h2 className="text-[#B88E2F] text-[2rem] font-bold">
-              Bringing Comfort to Your Campus
+              Bringing Comfort to Your Home
             </h2>
-            Explore a realm of convenience and style right at your
-            fingertips. Elevate your campus experience with our
-            meticulously selected range of premium products. From
-            fashion must-haves to cutting-edge tech, we've got all
-            your university essentials covered.
+            Discover a world of convenience and sophistication at your
+            fingertips. Enhance your campus lifestyle with our curated
+            selection of high-quality products. Whether you're in
+            search of fashion essentials or state-of-the-art
+            technology, we have everything you need to elevate your
+            university experience.
             <div>
               <button
                 className="bg-[#B88E2F] p-4 px-10 text-white text-md font-bold tracking-wider"

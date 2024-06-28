@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import NewHeader from '../home/NewHeader';
 import Breadcrumbs from '../others/Breadcrumbs';
-import LasuIcon from '../images/lasuIcon.jpg';
+import Icon from '../images/Meubel House_Logos-05.png';
 import ShopHeaderImage from '../images/Rectangle 1.png';
 import ShopFooter from '../shop/ShopFooter';
 import { Footer } from '../home/Footer';
@@ -28,7 +28,11 @@ const Contact = () => {
           <section className="mt-[70px] px-8 md:px-16 md:text-left py-6 text-center grid md:grid-cols-1 items-center justify-center">
             <div>
               <div className="flex items-center justify-center">
-                <img src={LasuIcon} alt="" className="w-24 h-24" />
+                <img
+                  src={Icon}
+                  alt=""
+                  className="transform scale-y-[-1]"
+                />
               </div>
               <h1 className="font-[Calibri] text-[2rem] font-extrabold text-center">
                 Contact
@@ -61,8 +65,7 @@ const Contact = () => {
               <div className="pl-10 w-full ">
                 <h3 className="text-[18px] font-bold">Address</h3>
                 <p className="text-[16px] font-semibold">
-                  Lasu Main Rd, Ojo, Lagos 102101, Lagos
-                  <br /> Nigeria
+                  30, Alhaji Amoo Street, Lagos Nigeria
                 </p>
               </div>
             </div>
