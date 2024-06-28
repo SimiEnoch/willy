@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Lasudata } from '../Lasudata';
+import { Data } from '../Data';
 import NewHeader from '../home/NewHeader';
 import { useGlobalContext } from '../Context/Context';
 import '../../App.css';
@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const { id } = useParams();
-  const oneProduct = Lasudata.find(
+  const oneProduct = Data.find(
     (product) => product.id === parseInt(id)
   );
 

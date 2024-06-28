@@ -27,11 +27,11 @@ const NewHero = () => {
               Bringing Comfort to Your Home
             </h2>
             Discover a world of convenience and sophistication at your
-            fingertips. Enhance your campus lifestyle with our curated
+            fingertips. Enhance yourlifestyle with our curated
             selection of high-quality products. Whether you're in
             search of fashion essentials or state-of-the-art
             technology, we have everything you need to elevate your
-            university experience.
+            experience.
             <div>
               <button
                 className="bg-[#B88E2F] p-4 px-10 text-white text-md font-bold tracking-wider"
