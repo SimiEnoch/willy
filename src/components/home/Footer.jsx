@@ -77,23 +77,10 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="text-center text-black text-[35px] font-bold mt-10">
-        <p className="text-center text-red-600 text-[14px] font-normal py-1">
-          NOTE: that this website serves as a platform connecting
-          buyers with sellers.
-          <br /> While it facilitates transactions, it may not assume
-          full responsibility for any financial losses
-          <br /> or loss of valuable assets incurred during the
-          process.
-        </p>
-
-        <p className="text-center text-black text-[35px] font-bold">
-          Willy.
-        </p>
-      </div>
+   
 
       <p className="text-center text-black text-[10px] font-sm mt-2">
-        © 2023 Willy ST. INC. All rights reserved
+        © 2024 Willy ST. INC. All rights reserved
       </p>
     </div>
   );

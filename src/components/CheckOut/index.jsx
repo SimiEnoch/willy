@@ -10,40 +10,35 @@ import ReuseableInputField from '../CheckOut/reuseableInputField';
 import Select from 'react-select';
 import { CountriesData } from './countryData';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const CheckOut = () => {
   const { cart } = useGlobalContext();
-  const [country, setCountry] = useState(CountriesData);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [deliveryFee, setDeliveryFee] = useState(0); // State to store the delivery fee
-  const [toggleCurrency, setToggleCurrency] = useState(true);
-
+  const [deliveryFee, setDeliveryFee] = useState(0);
   let transferDirectly = false;
-
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
     calculateDeliveryFee();
   }, [cart]);
-
-  const handleCountryChange = (selectedOption) => {
-    setSelectedCountry(selectedOption);
-  };
 
   const placeOrder = () => {
     alert('Order placed');
     navigate('/');
   };
 
-  const customStyles = {
-    control: (provided) => ({
-      ...provided,
-      border: '1px solid gray',
-      paddingTop: '16px',
-      paddingBottom: '16px',
-    }),
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    alert('Your order is being processed');
+    console.log(data);
+    navigate('/auth/login');
   };
 
   const calculateDeliveryFee = () => {
@@ -56,7 +51,6 @@ const CheckOut = () => {
       newFee = (totalPrice * 0.01).toFixed(2);
       transferDirectly = true;
     } else {
-      // Set the delivery fee to be 10% of the total price
       newFee = (totalPrice * 0.01).toFixed(2);
     }
 
@@ -64,10 +58,7 @@ const CheckOut = () => {
   };
 
   const getTotalPrice = () => {
-    return cart.reduce(
-      (total, item) => total + item.amount * item.price,
-      0
-    );
+    return cart.reduce((total, item) => total + item.amount * item.price, 0);
   };
 
   const formatNumberWithCommas = (number) => {
@@ -75,246 +66,154 @@ const CheckOut = () => {
   };
 
   return (
-    <section className="cart font-[Calibri]">
+    <section className="cart font-sans">
       <NewHeader />
-
-      <div className="relative font-[Calibri]">
+      <div className="relative">
         <img
           src={ShopHeaderImage}
-          alt="img"
-          className="w-full h-[40vh]"
+          alt="Checkout Banner"
+          className="w-full h-[40vh] object-cover"
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <section className="mt-[70px] px-8 md:px-16 md:text-left py-6 text-center grid md:grid-cols-1 items-center justify-center">
-            <div>
-              <div className="flex items-center justify-center">
-                <img src={Icon} alt="" className="h-24 w-24" />
-              </div>
-              <h1 className="font-[Calibri] text-[2rem] font-extrabold text-center">
-                Checkout
-              </h1>
-              <Breadcrumbs list={['Home', 'Checkout']} />
-            </div>
+          <section className="px-6 md:px-16 py-6 text-center md:text-left">
+            <h1 className="text-2xl md:text-4xl font-bold">Checkout</h1>
+            <Breadcrumbs list={['Home', 'Checkout']} />
           </section>
         </div>
       </div>
 
-      <div className="md:flex xl:flex lg:flex sm:grid grid-cols-1 text-start font-[Calibri] mt-5 py-5 px-1 mx-1 md:gap-0 sm:gap-5">
-        <div className="flex flex-col  w-full md:flex-glow-3 sm:px-0 lg:px-14 lg:mx-14 gap-6">
-          <div className="flex  py-3 px-2">
-            <div className="w-full">
-              <h3 className="text-[22px]  font-semibold">
-                Billing details
-              </h3>
-            </div>
+      <div className="container flex items-center justify-center mx-auto py-5 px-4 md:px-8 lg:px-16">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 md:grid-cols-2">
+          <div className="md:col-span-2">
+            <h3 className="text-xl font-semibold">Billing details</h3>
           </div>
 
-          {/*Billing details  */}
+          {/* First Name */}
           <div>
-            <div className="sm:block lg:flex gap-7">
-              <div>
-                <label className="text-[14px] font-bold">
-                  First Name
-                </label>{' '}
-                <br />
-                <input
-                  type="text"
-                  required
-                  className="border-2 p-4 w-full md:w-[32vw] lg:w-full rounded-lg border-gray-300"
-                />
-              </div>
-
-              <div>
-                <label className="text-[14px] font-bold">
-                  Last Name
-                </label>{' '}
-                <br />
-                <input
-                  type="text"
-                  required
-                  className="border-2 p-4 w-full lg:w-full md:w-[32vw] rounded-lg border-gray-300"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label className="text-[14px] font-bold">
-              Company Name (Optional)
-            </label>{' '}
-            <br />
+            <label className="block text-sm font-medium">First Name</label>
             <input
               type="text"
-              className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{' '}
-          </div>
-
-          {/* <div className="">
-            <label className="text-[14px] font-bold">
-              Country/Region
-            </label>
-            <Select
-              id="countryCode"
-              name="countryCode"
-              options={country}
-              value={selectedCountry}
-              onChange={handleCountryChange}
-              placeholder="Please select your Country"
-              className="w-full sm:w-full md:w-[32vw]   rounded-lg border-2"
-              styles={customStyles}
+              className="border p-2 w-full rounded-md"
+              {...register('firstName', {
+                required: 'First Name is required',
+              })}
             />
-          </div> */}
-
-          <ReuseableInputField label="Street address" />
-
-          <ReuseableInputField label="Town / City" />
-
-          <div>
-            <label className="text-[14px] font-bold">Zip code</label>{' '}
-            <br />
-            <input
-              type="number"
-              className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{' '}
+            {errors.firstName && (
+              <span className="text-red-600 text-xs">{errors.firstName.message}</span>
+            )}
           </div>
 
+          {/* Last Name */}
           <div>
-            <label className="text-[14px] font-bold">
-              Phone Number
-            </label>{' '}
-            <br />
+            <label className="block text-sm font-medium">Last Name</label>
             <input
-              type="number"
-              className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{' '}
+              type="text"
+              className="border p-2 w-full rounded-md"
+              {...register('lastName', {
+                required: 'Last Name is required',
+              })}
+            />
+            {errors.lastName && (
+              <span className="text-red-600 text-xs">{errors.lastName.message}</span>
+            )}
           </div>
 
+          {/* Company Name */}
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium">
+              Company Name (Optional)
+            </label>
+            <input
+              type="text"
+              className="border p-2 w-full rounded-md"
+              {...register('companyName')}
+            />
+          </div>
+
+          <ReuseableInputField label="Street address" register={register} />
+          <ReuseableInputField label="Town / City" register={register} />
+
+          {/* Zip Code */}
           <div>
-            <label className="text-[14px] font-bold ">
-              Email Address
-            </label>{' '}
-            <br />
+            <label className="block text-sm font-medium">Zip code</label>
+            <input
+              type="number"
+              className="border p-2 w-full rounded-md"
+              {...register('zipCode', {
+                required: 'Zip code is required',
+              })}
+            />
+            {errors.zipCode && (
+              <span className="text-red-600 text-xs">{errors.zipCode.message}</span>
+            )}
+          </div>
+
+          {/* Phone Number */}
+          <div>
+            <label className="block text-sm font-medium">Phone Number</label>
+            <input
+              type="number"
+              className="border p-2 w-full rounded-md"
+              {...register('phoneNumber', {
+                required: 'Phone Number is required',
+                minLength: {
+                  value: 10,
+                  message: 'Phone Number must be at least 10 digits',
+                },
+              })}
+            />
+            {errors.phoneNumber && (
+              <span className="text-red-600 text-xs">{errors.phoneNumber.message}</span>
+            )}
+          </div>
+
+          {/* Email Address */}
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium">Email Address</label>
             <input
               type="email"
-              className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{' '}
+              className="border p-2 w-full rounded-md"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+            />
+            {errors.email && (
+              <span className="text-red-600 text-xs">{errors.email.message}</span>
+            )}
           </div>
 
-          <div>
-            <label className="text-[14px] font-bold">
-              Additional Information
-            </label>{' '}
-            <br />
-            <input
-              type="text"
-              className="border-2 p-4 w-full sm:w-full md:w-[32vw]  rounded-lg border-gray-300"
-            />{' '}
-          </div>
-        </div>
-
-        <div className="rounded font-[Calibri] lg:w-[100%] lg:px-14 sm:w-full h-full py-1 mb-2 gap-20 overflow-y-auto sticky top-20">
-          <div className="flex justify-between">
-            <div>
-              <div className="font-bold text-xl">
-                Products Ordered
-              </div>
-              <div className="flex flex-col  py-2  gap-0 ">
+          <div className="md:col-span-2">
+            <h3 className="text-xl font-semibold">Order Summary</h3>
+            <div className="flex justify-between mt-4">
+              <div>
+                <p className="text-sm font-bold">Products Ordered</p>
                 {cart.map((item) => (
-                  <div className="text-gray-500 font-bold text-[14px]">
-                    {item.name} x {item.amount}
-                  </div>
+                  <p key={item.title} className="text-sm text-gray-600">
+                    {item.title} x {item.amount}
+                  </p>
                 ))}
               </div>
-            </div>
-
-            <div className="flex items-center">
-              <div className="py-2 text-[#B88E2F] font-bold md:text-[20px] xl:text-[30px]">
-                ₦
-                {cart
-                  .map((item) => item.price * item.amount)
-                  .reduce(
-                    (accumulator, currentValue) =>
-                      accumulator + currentValue,
-                    0
-                  )
-                  .toLocaleString()}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-between font-[Calibri]">
-            <div className="flex items-center">
-              <h2 className="font-bold md:text-[15px] md:py-0 lg:py-5 xl:py-10 lg:text-lg">
-                Total Plus Delivery:{' '}
-              </h2>
-            </div>
-            <div className="flex justify-between">
-              <p className="py-2 font-bold">Delivery: </p>
-              <div className="py-2 text-[#B88E2F] font-bold md:text-[20px] xl:text-[30px]">
-                <p className="text-[16px] font-[Calibri] text-gray-700 m-0 p-0 text-end">
-                  + ₦{deliveryFee.toLocaleString()}
-                </p>
-                <hr />
-                NGN ₦
-                {(
-                  getTotalPrice() + Number(deliveryFee)
-                ).toLocaleString()}
-              </div>
-            </div>
-          </div>
-
-          <hr />
-
-          <div className="font-[Calibri] ">
-            <div className="py-3 ">
-              <div className="flex gap-3">
-                <input type="radio" className="cursor-pointer " />
-                <label className="text-[22px] ">
-                  Direct Bank Transfer
-                </label>
-              </div>
-              <p className="text-[18px] text-black">
-                Make your payment directly into our bank account.
-                Please use your Order ID as the payment reference.
-                Your order will not be shipped until the funds have
-                cleared in our account.
-              </p>
-            </div>
-
-            {transferDirectly && (
-              <div className="py-3">
-                <div className="flex gap-3">
-                  <input type="radio" className="cursor-pointer" />
-                  <label className="text-[22px] ">
-                    Cash On Delivery
-                  </label>
-                </div>
-                <p className="text-[17px] text-black">
-                  Pay with cash when your order is delivered to your
-                  doorstep. Please have the exact amount ready for a
-                  smooth transaction.
+              <div className="text-right">
+                <p className="text-lg font-bold">Total: ${getTotalPrice().toLocaleString()}</p>
+                <p className="text-sm text-gray-600">+ Delivery: ${deliveryFee}</p>
+                <p className="text-lg font-bold">
+                  Grand Total: ${(getTotalPrice() + Number(deliveryFee)).toLocaleString()}
                 </p>
               </div>
-            )}
-            <p className="py-5 text-[#9F9F9F]">
-              Your personal data will be used to support your
-              experience throughout this website, to manage access to
-              your account, and for other purposes described in our{' '}
-              <button className=" underline text-blue-500">
-                privacy policy.
-              </button>
-            </p>
-
-            <div className="text-center items-center justify-center mt-1 pt-1 flex">
-              <button
-                className="border-2 border-black px-14 py-4 rounded"
-                onClick={placeOrder}
-              >
-                Place Order
-              </button>
             </div>
           </div>
-        </div>
+
+          <button
+            type="submit"
+            className="md:col-span-2 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-full"
+          >
+            Order
+          </button>
+        </form>
       </div>
 
       <ShopFooter />

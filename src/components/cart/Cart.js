@@ -5,14 +5,15 @@ import {
   BsFillPlusSquareFill,
   BsFillFileMinusFill,
 } from 'react-icons/bs';
-import ShopFooter from '../shop/ShopFooter';
 
 export const Cart = ({
   id,
   mainId,
   name,
+  title,
   price,
   image,
+  thumbnail,
   amount,
   oldPrice,
 }) => {
@@ -43,50 +44,48 @@ export const Cart = ({
   };
 
   const remove = () => {
-    const newCart = cart.filter((item) => item.mainId !== mainId);
+    const newCart = cart.filter((item) => item.id !== id);
     setCart(newCart);
   };
 
   return (
-    <article className="flex w-full sm:px-1 font-[Calibri]">
-      <div className="grid w-[50%]">
+    <article className="flex w-full sm:px-1 font-[Calibri] items-center justify-between bg-white py-2">
+      {/* Product Thumbnail and Name */}
+      <div className="w-1/2 flex items-center">
         <img
-          src={image}
+          src={thumbnail}
           alt={name}
-          className="border-separate object-cover h-20 sm:h-30 w-20 rounded"
+          className="object-cover h-20 w-20 rounded border-separate"
         />
-        <h4 className="text-[10px] text-[#9F9F9F] font-bold w-auto align-start justify-start text-start ">
-          {name}
+        <h4 className="ml-4 text-[12px] text-black font-bold">
+          {title}
         </h4>
       </div>
-      <div className="flex justify-center  items-center md:mx-14 lg:mx-14  xl:mx-14 mx-0 sm:mx-14 w-full">
-        <h4 className="pr-0 mr-auto text-sm font-bold w-full text-center lg:text-start text-black mb-3 rounded mt-1">
-          ₦{price.toLocaleString()}.00
-        </h4>
-        <div className="w-full lg:block hidden">
-          <h4 className="text-[13px] line-through  w-full text-[#9F9F9F] mb-3 p-1 rounded mt-1">
-            ₦{oldPrice.toLocaleString()}.00
-          </h4>
-        </div>
 
-        <div className="flex items-start  justify-start ml-auto lg:gap-3 gap-2">
-          <button className="p-2 " onClick={decrease}>
-            <BsFillFileMinusFill />
-          </button>
-          <p className="text-end">{amount}</p>
-          <button className="p-2 " onClick={increase}>
-            <BsFillPlusSquareFill />
-          </button>
-        </div>
-        <div className="text-end font-bold">
-          <BsFillTrash3Fill
-            className="text-[#B88E2F]  text-[11px] hover:cursor-pointer"
-            onClick={() => {
-              console.log(mainId);
-              remove();
-            }}
-          />
-        </div>
+      {/* Product Price */}
+      <div className="w-1/4 text-center">
+        <h4 className="text-sm font-bold text-black">
+          ${price.toLocaleString()}
+        </h4>
+      </div>
+
+      {/* Quantity Controls */}
+      <div className="w-1/4 flex items-center justify-center gap-2">
+        <button className="p-2" onClick={decrease}>
+          <BsFillFileMinusFill />
+        </button>
+        <p>{amount}</p>
+        <button className="p-2" onClick={increase}>
+          <BsFillPlusSquareFill />
+        </button>
+      </div>
+
+      {/* Remove Button */}
+      <div className="text-end font-bold">
+        <BsFillTrash3Fill
+          className="text-[#B88E2F] text-[11px] hover:cursor-pointer"
+          onClick={remove}
+        />
       </div>
     </article>
   );

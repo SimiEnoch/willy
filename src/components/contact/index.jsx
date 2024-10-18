@@ -54,8 +54,8 @@ const Contact = () => {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row text-start font-[Calibri] mt-10 px-4">
-        <div className="flex w-full  sm:order-1 order-2 md:order-1  md:w-[50%] flex-col mb-10 sm:items-center justify-center  gap-6 sm:flex items-start sm:justify-start">
+      <div className="flex items-center justify-center text-start font-[Calibri] mt-10 px-4">
+        <div className="flex w-full ]  mb-10 sm:items-center justify-center  gap-6 sm:flex items-start sm:justify-start">
           <div className="flex  py-3 px-2"></div>
 
           <div className="flex items-center justify-center w-full">
@@ -101,60 +101,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="rounded font-[Calibri] w-full md:w-[50%] mx-auto h-full py-6 mb-2 gap-20 overflow-y-auto  top-20">
-          <div className="mb-5">
-            <label className="text-[14px] font-bold">Your Name</label>{' '}
-            <br />
-            <input
-              type="text"
-              required
-              placeholder="e.g John Doe"
-              className="border-2 p-4 w-[100%] lg:w-[40vw] rounded-lg border-gray-300"
-            />
-          </div>
-
-          <div className="mb-5">
-            <label className="text-[14px] font-bold">
-              Email Address
-            </label>{' '}
-            <br />
-            <input
-              type="email"
-              required
-              placeholder="e.g johndoe@gmail.com"
-              className="border-2 p-4 w-[100%]  lg:w-[40vw] rounded-lg border-gray-300"
-            />
-          </div>
-
-          <div className="mb-5">
-            <label className="text-[14px] font-bold">Subject </label>{' '}
-            <br />
-            <input
-              type="text"
-              required
-              placeholder="This is Optional"
-              className="border-2 p-4 w-[100%]  lg:w-[40vw] rounded-lg border-gray-300"
-            />
-          </div>
-
-          <div className="mb-5">
-            <label className="text-[14px] font-bold">Message </label>{' '}
-            <br />
-            <textarea
-              className="border-2 p-4 w-[100%]  lg:w-[40vw] rounded-lg border-gray-300"
-              placeholder="Enter your message"
-            ></textarea>
-          </div>
-
-          <div className="">
-            <button
-              className="bg-[#B88E2F] px-14 py-2 text-white  rounded font-[Calibri]"
-              onClick={() => alert('Details Submitted')}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
+    
       </div>
 
       <ShopFooter />

@@ -4,9 +4,19 @@ const Cart = createContext();
 
 const Context = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState(null);
 
   const clearCart = () => {
     setCart([]);
+  };
+
+  const login = (userData) => {
+    setUser(userData);
+  };
+
+  const logout = () => {
+    setUser(null);
+    clearCart(); // Optionally clear cart on logout
   };
 
   return (
@@ -14,6 +24,9 @@ const Context = ({ children }) => {
       value={{
         clearCart,
         cart,
+        user,
+        login,
+        logout,
         setCart,
       }}
     >

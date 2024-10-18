@@ -1,6 +1,5 @@
 import OurProducts from './OurProducts';
 import NewHeader from './NewHeader';
-import OtherStores from './otherStores';
 import NewHero from './NewHero';
 import { Footer } from './Footer';
 import { useEffect } from 'react';
@@ -15,7 +14,6 @@ const HomePage = () => {
       <NewHeader />
       <NewHero />
       <OurProducts />
-      <OtherStores />
       <Footer />
     </div>
   );
