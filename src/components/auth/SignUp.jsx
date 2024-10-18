@@ -11,9 +11,19 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+
+  // State variables to hold server error messages
+  const [serverError, setServerError] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
   const onSubmit = async (data) => {
     setLoading(true);
+    setServerError({ name: '', email: '', password: '' }); // Clear previous errors
     try {
       const response = await axios.post(
         'http://localhost:8000/api/users',
@@ -21,13 +31,21 @@ const SignUp = () => {
       );
 
       console.log('User registered:', response.data);
-
       navigate('/auth/login');
     } catch (error) {
       console.error(
         'Error during registration:',
         error.response?.data || error.message
       );
+
+      // Set server errors based on response
+      if (error.response?.data) {
+        setServerError({
+          name: error.response.data.name || '',
+          email: error.response.data.email || '',
+          password: error.response.data.password || '',
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -57,17 +75,27 @@ const SignUp = () => {
                 Full Name
               </label>
               <input
-                type="text"
+                type="name"
                 id="name"
                 {...register('name', {
-                  required: 'Name is required',
+                  required: 'Full name is required',
+                  minLength: {
+                    value: 5,
+                    message:
+                      'Full name must be at least 8 characters',
+                  },
                 })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="John Doe"
               />
-              {errors.name && (
+              {errors.password && (
                 <span className="text-red-500 text-xs mt-1">
-                  {errors.name.message}
+                  {errors.password.message}
+                </span>
+              )}
+              {serverError.password && (
+                <span className="text-red-500 text-xs mt-1">
+                  {serverError.password}
                 </span>
               )}
             </div>
@@ -96,7 +124,13 @@ const SignUp = () => {
                   {errors.email.message}
                 </span>
               )}
+              {serverError.email && (
+                <span className="text-red-500 text-xs mt-1">
+                  {serverError.email}
+                </span>
+              )}
             </div>
+
             <div>
               <label
                 htmlFor="password"
@@ -122,8 +156,28 @@ const SignUp = () => {
                   {errors.password.message}
                 </span>
               )}
+              {serverError.password && (
+                <span className="text-red-500 text-xs mt-1">
+                  {serverError.password}
+                </span>
+              )}
             </div>
-      
+
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="isAdmin"
+                {...register('isAdmin')}
+                className="mr-2"
+              />
+              <label
+                htmlFor="isAdmin"
+                className="text-sm font-medium text-gray-700"
+              >
+                Register as Admin
+              </label>
+            </div>
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
