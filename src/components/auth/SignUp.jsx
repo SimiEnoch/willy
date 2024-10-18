@@ -82,20 +82,20 @@ const SignUp = () => {
                   minLength: {
                     value: 5,
                     message:
-                      'Full name must be at least 8 characters',
+                      'Full name must be at least 5 characters',
                   },
                 })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="John Doe"
               />
-              {errors.password && (
+              {errors.name && (
                 <span className="text-red-500 text-xs mt-1">
-                  {errors.password.message}
+                  {errors.name.message}
                 </span>
               )}
-              {serverError.password && (
+              {serverError.name && (
                 <span className="text-red-500 text-xs mt-1">
-                  {serverError.password}
+                  {serverError.name}
                 </span>
               )}
             </div>
